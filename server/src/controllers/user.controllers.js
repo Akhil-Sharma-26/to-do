@@ -1,14 +1,15 @@
 import { error, log } from "console";
 import User from "../models/user.model";
+import { options } from "../constants/constant";
 
 
-const generateAccessToken = async (userId) => {
+const generateAccessToken = async (user) => {
     try {
-        const user = await User.findById(userId);
+        // const user = await User.findById(userId);
         const accessToken = user.generateAccessToken(); // method as defind in modal of user
         user.accessToken = accessToken;
-        await user.save({ validateBeforeSave: false }); // validateBeforeSave is false because we are not updating all field
-        return { accessToken, refreshToken };
+        await user.save({ validateBeforeSave: false }); 
+        return accessToken;
     } catch (error) {
         throw new ApiError(500, "Token creation failed");
     }
@@ -44,22 +45,30 @@ async function registerUser(req,res){
 }
 
 async function LoginUser(req,res){
-    const {email,password} = req.body;
-    if(email && password){
-        console.log('Something is missing');
+    try {
+        const {email,password} = req.body;
+        if(email && password){
+            console.log('Something is missing');
+        }
+        const user = User.findOne({
+            $or : [
+                {email},
+                {password}
+            ]
+        })
+        if(!user){
+            throw new error(404,'User doenst exist in DB')
+        }
+        const passValidorNot = User.passValidorNot(password)
+        if (!isPassValid) {
+            throw new error(401, "Password is incorrect");
+        }
+        const accessToken= await generateAccessToken(user); // I am tweeking the argument here, change it to prev state if some unexpected error appears 
+    
+        return res.status(200).cookie("accessToken",accessToken,options).json({
+            data: 'Yoooo!!! User Registered'
+        })
+    } catch (error) {
+        console.log('A very serious error has poped out!!',error);
     }
-    const user = User.findOne({
-        $or : [
-            {email},
-            {password}
-        ]
-    })
-    if(!user){
-        throw new error(404,'User doenst exist in DB')
-    }
-    const passValidorNot = User.passValidorNot(password)
-    if (!isPassValid) {
-        throw new error(401, "Password is incorrect");
-    }
-    const { accessToken} = await generateAccessToken(user._id); // I am tweeking the argument here, change it to prev state if some unexpected error appears 
 }
