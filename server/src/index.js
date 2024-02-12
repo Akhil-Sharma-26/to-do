@@ -7,14 +7,14 @@ import connect from './db/dbConnect.js'
 connect()
 
 const app = express()
+app.use(cookieParser())
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     credentials: true
 }))
 dotenv.config({
     path: './.env'
 })
-app.use(cookieParser())
 app.use(express.json()) // body parser
 app.use(express.static('public'))
 app.listen(process.env.PORT || 7231, () => console.log('Server started at: ', process.env.PORT))

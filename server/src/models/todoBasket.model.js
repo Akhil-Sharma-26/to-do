@@ -4,6 +4,7 @@ const todosBasketSchema = Schema({
     title:{
         type: String,
         required: true,
+        unique: true
     },
     createdBy: {
         type: Schema.Types.ObjectId,

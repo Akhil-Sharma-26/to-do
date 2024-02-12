@@ -15,11 +15,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Createdtodos: {
+    Createdtodos: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'TodoBasket',
-        required: false
-    },
+        required: false,
+        unique: true,
+    }],
     accessToken:{
         type:String,
         required:false
