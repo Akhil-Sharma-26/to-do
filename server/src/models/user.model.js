@@ -18,7 +18,11 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'TodoBasket',
         required: false
-    }
+    },
+    accessToken:{
+        type:String,
+        required:false
+    },
 },{timestamps:true})
 
 userSchema.pre("save",async function(next){ // Hashin password
@@ -29,10 +33,27 @@ userSchema.pre("save",async function(next){ // Hashin password
     next();
 })
 
+userSchema.methods.generateAccessToken = function(){ // Generating access token
+    const user = this;
+    const token = jwt.sign({
+        id:user._id,
+        email:user.email,
+        username:user.username,
+        fullName:user.fullName,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+        expiresIn:process.env.ACCESS_TOKEN_EXPIRY
+    });
+    return token;
+}
+
 userSchema.methods.isPasswordCorrect = async function(password){ // Checking password
     const user = this;
     return await bcrypt.compare(password,user.password);
 }
+
+
 
 const User = mongoose.model('User',userSchema)
 
