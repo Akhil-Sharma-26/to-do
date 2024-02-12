@@ -1,5 +1,5 @@
 import {
-    CreatingBasket
+    CreatingBasket, deleteBasket
 } from '../controllers/bigTodo.controllers.js'
 import { Router } from 'express'
 import { verifyJWT } from '../middleware/auth.middleware.js'
@@ -7,5 +7,5 @@ import { verifyJWT } from '../middleware/auth.middleware.js'
 const router = Router()
 
 router.route('/create').post(verifyJWT, CreatingBasket)    
-
+router.route('/delete/:BasketID').post(verifyJWT, deleteBasket)
 export default router
