@@ -6,13 +6,17 @@ const userSchema = mongoose.Schema({
         required: true,
         index : true,
     },
+    email:{
+        type: String,
+        required: true,
+    },
     password: {
         type: String,
         required: true
     },
-    todos: {
+    Createdtodos: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Todos',
+        ref: 'TodoBasket',
         required: false
     }
 },{timestamps:true})
