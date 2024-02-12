@@ -1,4 +1,4 @@
-options = {
+const options = {
     httpOnly: true,
 }
 

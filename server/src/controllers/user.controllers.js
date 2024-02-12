@@ -1,6 +1,6 @@
 import { error, log } from "console";
-import User from "../models/user.model";
-import { options } from "../constants/constant";
+import User from "../models/user.model.js";
+import { options } from "../constants/constant.mjs";
 
 
 const generateAccessToken = async (user) => {
@@ -71,4 +71,9 @@ async function LoginUser(req,res){
     } catch (error) {
         console.log('A very serious error has poped out!!',error);
     }
+}
+
+export {
+    LoginUser,
+    registerUser
 }
