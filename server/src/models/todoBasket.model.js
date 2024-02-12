@@ -13,7 +13,8 @@ const todosBasketSchema = Schema({
     todos:[
         {
             type: Schema.Types.ObjectId,
-            ref: "todos"
+            ref: "todos",
+            unique: true
         }
     ]
 },{timestamps:true})

@@ -7,5 +7,5 @@ import { verifyJWT } from '../middleware/auth.middleware.js'
 const router = Router()
 
 router.route('/create').post(verifyJWT, CreatingBasket)    
-router.route('/delete/:BasketID').post(verifyJWT, deleteBasket)
+router.route('/delete/:basketID').post(verifyJWT, deleteBasket)
 export default router

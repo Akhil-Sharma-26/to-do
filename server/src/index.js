@@ -23,5 +23,7 @@ app.listen(process.env.PORT || 7231, () => console.log('Server started at: ', pr
 
 import userRouter from './routes/user.routes.js'
 import BasketRouter from './routes/todoBasket.routes.js'
+import todoRouter from './routes/todos.routes.js'
 app.use('/api/user',userRouter)
 app.use('/api/basket',BasketRouter)
+app.use('/api/todo',todoRouter)
