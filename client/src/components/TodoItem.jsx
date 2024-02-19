@@ -24,7 +24,10 @@ function TodoItem({ todo }) {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.complete}
-                onChange={toggleCompleted}
+                onChange={(e) => {
+                    e.preventDefault();
+                    toggleCompleted();
+                }}
             />
             <input
                 type="text"
