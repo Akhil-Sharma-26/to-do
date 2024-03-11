@@ -8,15 +8,9 @@ const todosBasketSchema = Schema({
     },
     createdBy: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     },
-    todos:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: "todos",
-            unique: true
-        }
-    ]
 },{timestamps:true})
 
 const TodoBasket = mongoose.model('TodoBasket',todosBasketSchema)

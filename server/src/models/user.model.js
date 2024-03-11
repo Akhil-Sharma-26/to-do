@@ -15,12 +15,6 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Createdtodos: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'TodoBasket',
-        required: false,
-        // unique: true,
-    }],
     accessToken:{
         type:String,
         required:false
@@ -30,7 +24,7 @@ const userSchema = mongoose.Schema({
 userSchema.pre("save",async function(next){ // Hashin password
     const user = this;
     if(user.isModified("password")){
-        user.password = await bcrypt.hash(user.password,7);
+        user.password = await bcrypt.hash(user.password,8);
     }
     next();
 })

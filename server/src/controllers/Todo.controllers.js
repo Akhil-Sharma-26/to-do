@@ -2,14 +2,14 @@ import todos from "../models/todos.model.js";
 import TodoBasket from "../models/todoBasket.model.js";
 async function createTodo(req,res){
     const bracketID = req.params.bracketID
-    const {heading,content,complete} = req.body
+    const {content,complete} = req.body
     console.log(req.params);
     console.log(bracketID);
-    if(!heading && !content && !complete){
+    if(!content){
         throw new Error('Fields are missing!!!')
     }
     const newTodo = new todos({
-        heading:heading,
+        createdbyBasket:bracketID,
         content:content
     })
     if(!newTodo){
@@ -18,18 +18,25 @@ async function createTodo(req,res){
         })
     }
     await newTodo.save()
-    const basket = await TodoBasket.findByIdAndUpdate(bracketID,{
-        $push: {
-            todos : newTodo
-        }
-    },{new:true})
-    console.log(basket);
-    basket.save()
+    // console.log(basket);
+    // basket.save()
     return res.status(200).json({
         data: "Successfuulllyy Created a new todo!!"
     })
 }
-
+async function getTodos(req,res){
+    const bracketID = req.params.bid
+    const todo = await todos.find({createdbyBasket:bracketID})
+    if(!todo){
+        res.status(501).json({
+            error: "Failed to get todos"
+        })
+    }
+    return res.status(200).json({
+        data: todo
+    })
+}
 export {
-    createTodo
+    createTodo,
+    getTodos
 }

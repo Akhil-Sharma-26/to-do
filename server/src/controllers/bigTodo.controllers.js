@@ -13,20 +13,6 @@ async function CreatingBasket(req,res){
         })
         await Basket.save()
         console.log(Basket);
-        if(Basket){
-            await User.findByIdAndUpdate(
-                req.user?._id,
-                {
-                    $push: {
-                        Createdtodos : Basket
-                    },
-                    
-            },
-            {
-                new: true
-            })
-        }
-        await req.user.save()
         // await User.save
         if(!Basket){
             throw new Error(502,'Basket Creation Failed');
@@ -70,7 +56,20 @@ async function deleteBasket(req,res){
         data: "Nicely deleted the Basket"
     })
 }
+async function getBaskets(req,res){
+    const user = req.user
+    const baskets = await TodoBasket.find({createdBy:user?._id})
+    if(!baskets){
+        return res.status(404).json({
+            error: "No baskets found"
+        })
+    }
+    res.status(200).json({
+        data: baskets
+    })
+}
 export{
+    getBaskets,
     CreatingBasket,
     deleteBasket
 }
