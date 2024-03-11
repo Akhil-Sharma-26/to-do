@@ -1,0 +1,103 @@
+import React, { ChangeEvent } from 'react'; // ChangeEvent is used for the type of the event in handleAvatarChange
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import { useForm } from "react-hook-form";
+import 'tailwindcss/tailwind.css';
+import connection from '../utils/Backend_connect';
+// import { Path } from 'react-router-dom';
+
+function SignupPage() {
+    interface FormInput {
+        username: string;
+        email: string;
+        password: string;
+    }
+    const { register, handleSubmit } = useForm<FormInput>();
+
+
+    const onSubmit = async (data: FormInput) => {
+        try {
+            const response = await connection.post('/user/signup', data, { withCredentials: true });
+            console.log(response);
+            console.log(`${import.meta.env.VITE_APP_BACK}/api/v1`);
+
+            console.log('success: from server')
+        } catch (error: any) {
+            console.log('error: from server');
+            console.log(error);
+        }
+    }
+
+    return (
+        <Container maxWidth="xs" className='text-black'>
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+                // className=''
+            >
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 ">
+
+                    <TextField
+                        {...register("username")}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm md:text-base border-gray-300 rounded-md "
+                    />
+                    <TextField
+                        {...register("email")}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm md:text-base border-gray-300 rounded-md "
+                    />
+                    <TextField
+                        {...register("password")}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="password"
+                        label="Password"
+                        name="password"
+                        autoComplete="password"
+                        autoFocus
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm md:text-base border-gray-300 rounded-md "
+                    />
+
+                </form>
+
+                <Button
+                    type="submit"
+                    onClick={handleSubmit(onSubmit)}
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="mt-3 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 "
+                >
+                    Sign-Up
+                </Button>
+            </Box >
+        </Container>
+    );
+}
+
+export default SignupPage;
