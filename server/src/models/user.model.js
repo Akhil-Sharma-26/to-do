@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'TodoBasket',
         required: false,
-        unique: true,
+        // unique: true,
     }],
     accessToken:{
         type:String,

@@ -74,7 +74,7 @@ async function LoginUser(req,res){
         const accessToken= await generateAccessToken(user); // I am tweeking the argument here, change it to prev state if some unexpected error appears 
         console.log(accessToken);
         return res.status(200).cookie("accessToken",accessToken,options).json({
-            data: 'Yoooo!!! User loggedIn successfull'
+            data: user
         })
     } catch (error) {
         console.log('A very serious error has poped out!!',error);

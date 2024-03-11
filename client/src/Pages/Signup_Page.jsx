@@ -9,22 +9,22 @@ import connection from '../utils/Backend_connect';
 // import { Path } from 'react-router-dom';
 
 function SignupPage() {
-    interface FormInput {
-        username: string;
-        email: string;
-        password: string;
-    }
-    const { register, handleSubmit } = useForm<FormInput>();
+    // interface FormInput {
+    //     username: string;
+    //     email: string;
+    //     password: string;
+    // }
+    const { register, handleSubmit } = useForm();
 
 
-    const onSubmit = async (data: FormInput) => {
+    const onSubmit = async (data) => {
         try {
             const response = await connection.post('/user/signup', data, { withCredentials: true });
             console.log(response);
             console.log(`${import.meta.env.VITE_APP_BACK}/api/v1`);
 
             console.log('success: from server')
-        } catch (error: any) {
+        } catch (error) {
             console.log('error: from server');
             console.log(error);
         }

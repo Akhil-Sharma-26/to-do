@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import Login from './Pages/Login_page.tsx'
-import SignUp from './Pages/Signup_Page.tsx'
+import Login from './Pages/Login_page.jsx'
+import SignUp from './Pages/Signup_Page.jsx'
 import { RouterProvider, createBrowserRouter,createRoutesFromElements, Route } from 'react-router-dom'
 import TodoForm from './components/TodoForm.jsx'
-import TodoItem from './components/TodoItem.jsx'
+// import TodoItem from './components/TodoItem.jsx'
+import AddNew from './Pages/AddNew.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,7 +16,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login/>  }/>
       <Route path='/signup' element={<SignUp/>  }/>
       <Route path='/todoform' element={<TodoForm/>  }/>
-      <Route path='/todoitem' element={<TodoItem/>  }/>
+      <Route path='/addnew' element={<AddNew/>  }/>
     </Route>
     
   )

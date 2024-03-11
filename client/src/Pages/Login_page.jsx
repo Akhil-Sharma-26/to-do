@@ -7,29 +7,40 @@ import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 // import axios from 'axios';
 import connection from '../utils/Backend_connect.ts';
+import React, {useState, useContext, useEffect} from "react";
+import UserContext from "../context/UserContext.js";
+import UserContextProvider from "../context/UserContextProvider.jsx";
+
+// useEffect(()=>{
+//   console.log('Helo');
+// },[localStorage.getItem('username')])
+function LoginPage ()  {  
+  const [username,setusername] =useState('')
+  const [pass,setpass] =useState('')
+
+  // // context: Comes from Provider
+  // const {setUser} = useContext(UserContext)
 
 
-
-function LoginPage ()  {
-  interface FormInput {
-  username: string;
-  email: string;
-  password: string;
-}
-  const { register, handleSubmit } = useForm<FormInput>();
-  const onSubmit = async (data: FormInput) => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (data) => {
     console.log(data);
     try {
         const response = await connection.post('/user/login', data, { withCredentials: true });
         console.log('helo');
-        console.log(response);
-    } catch (error:any) {
+        // console.log(response.data.data.username);
+        // setusername(response.data.data.username)
+        // setpass()
+        // setUser({username,pass})
+        localStorage.setItem('username',(response.data.data.username))
+    } catch (error) {
         console.log('error');
         console.log(error);
     }
   }
 
   return (
+    // <UserContextProvider>
     <Container maxWidth="xs" className='text-white'>
       <Box
         sx={{
@@ -78,6 +89,7 @@ function LoginPage ()  {
         </form>
       </Box>
     </Container>
+    // </UserContextProvider>
   );
 }
 
