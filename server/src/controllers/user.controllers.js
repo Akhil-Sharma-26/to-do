@@ -2,6 +2,7 @@ import { error, log } from "console";
 import User from "../models/user.model.js";
 import { options } from "../constants/constant.mjs";
 
+import jwt from "jsonwebtoken"
 
 const generateAccessToken = async (user) => {
     try {
@@ -88,7 +89,8 @@ async function LoginUser(req,res){
         const accessToken= await generateAccessToken(user); // I am tweeking the argument here, change it to prev state if some unexpected error appears 
         // console.log(accessToken);
         return res.status(200).cookie("accessToken",accessToken,options).json({
-            data: user
+            data: user,
+            message: "Wow!!"
         })
     } catch (error) {
         return res.status(500).json({
@@ -116,7 +118,28 @@ async function logout(req,res){
         data: "Logout Successfull!!"
     })
 }
+async function checkUser(req,res){
+    // console.log(req.cookies);
+    const token = req.cookies?.accessToken
+    // console.log(token);
+    if (!token) {
+        return res.status(200).json({
+            data: null
+        })
+    }
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    const user = await User.findById(decodedToken?.id).select("-password")
+    if (!user) {
+        return res.status(200).json({
+            data: null
+        })
+    }
+    return res.status(200).json({
+        data: user
+    })
+}
 export {
+    checkUser,
     LoginUser,
     registerUser,
     logout

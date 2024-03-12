@@ -11,6 +11,7 @@ import React, {useState, useContext, useEffect} from "react";
 import UserContext from "../context/UserContext.js";
 import UserContextProvider from "../context/UserContextProvider.jsx";
 
+import {useNavigate} from "react-router-dom";
 // useEffect(()=>{
 //   console.log('Helo');
 // },[localStorage.getItem('username')])
@@ -18,6 +19,7 @@ function LoginPage ()  {
   const [username,setusername] =useState('')
   const [pass,setpass] =useState('')
 
+  const router = useNavigate();
   // // context: Comes from Provider
   // const {setUser} = useContext(UserContext)
 
@@ -28,11 +30,16 @@ function LoginPage ()  {
     try {
         const response = await connection.post('/user/login', data, { withCredentials: true });
         console.log('helo');
+        
         // console.log(response.data.data.username);
         // setusername(response.data.data.username)
         // setpass()
         // setUser({username,pass})
+        setTimeout(() => {
+          router(0)
+        }, 1000);
         localStorage.setItem('username',(response.data.data.username))
+        router('/')
     } catch (error) {
         console.log('error');
         console.log(error);

@@ -4,14 +4,12 @@ import  User from "../models/user.model.js";
 export async function verifyJWT (req, _, next) {
     // console.log(req.cookies?.accessToken);
     // try {
+        console.log("asdsa: ",req.cookies);
+        const token = req.cookies?.accessToken;
         
-        const token = req.cookies?.accessToken
-        
-        // console.log(token);
+        console.log(token);
         if (!token) {
-            return res.status(401).json({
-                error: "Access token is missing"
-            })
+            throw new Error(300, "Unauthorized request")
         }
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
@@ -20,9 +18,7 @@ export async function verifyJWT (req, _, next) {
         // console.log(user);
         if (!user) {
             
-            return res.status(401).json({
-                error: "User not found"
-            })
+            throw new Error(401, "Invalid Access Token")
         }
     
         req.user = user;

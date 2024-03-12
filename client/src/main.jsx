@@ -11,6 +11,7 @@ import AddNew from './Pages/AddNew.jsx'
 import NewBasket from './Pages/NewBasket.jsx'
 import HomePage from './Pages/HomePage.jsx'
 import TodoList from './Pages/TodosPage.jsx'
+import Profile_Page from './Pages/Profile_Page.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +22,8 @@ const router = createBrowserRouter(
       <Route path='/todoform' element={<TodoForm/>  }/>
       <Route path='/addnew' element={<AddNew/>  }/>
       <Route path='/newbasket' element={<NewBasket/>  }/>
-      <Route path='/:bid' element={<TodoList/>  }/>
+      <Route path='/baskets/:bid' element={<TodoList/>  }/>
+      <Route path='/profile' element={<Profile_Page/>  }/>
     </Route>  
     
   )

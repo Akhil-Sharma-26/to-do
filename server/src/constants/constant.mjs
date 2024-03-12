@@ -1,6 +1,6 @@
 const options = {
     httpOnly: true,
-    sameSite: true,
+    // secure: true,
 }
 
 export {options}

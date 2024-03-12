@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import connection from "../../utils/Backend_connect";
 // difference between Link and NavLink
 // Link is used to navigate to a different page in the application
 // NavLink is used to navigate to a different page in the application, but it has the ability to add a class to the link when it is active
@@ -7,6 +8,26 @@ import { Link, NavLink } from "react-router-dom";
 // import UserContext from "../../context/userContext";
 export default function Header() {
     // const { user } = useContext(UserContext)
+    const [error,seterror]=useState(false)
+    const [user,setuser]=useState("Hello")
+    useEffect(()=>{
+        const fetchData = async () => {
+            try {
+                const res = await connection.post('/user/check',{}, { withCredentials: true });
+                console.log(res);
+                if(res.data.data===null){
+                    seterror(true)
+                }
+                else{
+                    console.log(res);
+                    setuser(res.data.data)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    },[])
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -19,12 +40,12 @@ export default function Header() {
                         />
                     </Link>
                     <div className="flex items-center lg:order-2">
-                        {localStorage.getItem("username") ? (
+                        {!error ? (
                             <Link
                                 to="/profile"
                                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                             >
-                                {localStorage.getItem("username")}
+                                {user?.username}
                             </Link>
                         ) : (
                             <>                            <Link
