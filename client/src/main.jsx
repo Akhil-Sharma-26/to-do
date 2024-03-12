@@ -5,9 +5,9 @@ import './index.css'
 import Login from './Pages/Login_page.jsx'
 import SignUp from './Pages/Signup_Page.jsx'
 import { RouterProvider, createBrowserRouter,createRoutesFromElements, Route } from 'react-router-dom'
-import TodoForm from './components/TodoForm.jsx'
+// import TodoForm from './components/TodoForm.jsx'
 // import TodoItem from './components/TodoItem.jsx'
-import AddNew from './Pages/AddNew.jsx'
+// import AddNew from './Pages/AddNew.jsx'
 import NewBasket from './Pages/NewBasket.jsx'
 import HomePage from './Pages/HomePage.jsx'
 import TodoList from './Pages/TodosPage.jsx'
@@ -19,8 +19,6 @@ const router = createBrowserRouter(
       <Route path='' element={<HomePage/>  }/>
       <Route path='/login' element={<Login/>  }/>
       <Route path='/signup' element={<SignUp/>  }/>
-      <Route path='/todoform' element={<TodoForm/>  }/>
-      <Route path='/addnew' element={<AddNew/>  }/>
       <Route path='/newbasket' element={<NewBasket/>  }/>
       <Route path='/baskets/:bid' element={<TodoList/>  }/>
       <Route path='/profile' element={<Profile_Page/>  }/>

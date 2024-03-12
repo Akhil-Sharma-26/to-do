@@ -35,11 +35,11 @@ function SignupPage() {
             <Box
                 sx={{
                     marginTop: 8,
-                    display: 'flex',
+                    display: 'flex flex-col h-full',
                     flexDirection: 'column',
                     alignItems: 'center',
                 }}
-                // className=''
+            // className=''
             >
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 ">
 
@@ -83,18 +83,18 @@ function SignupPage() {
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm md:text-base border-gray-300 rounded-md "
                     />
 
+                    <Button
+                        type="submit"
+                        onClick={handleSubmit(onSubmit)}
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 "
+                    >
+                        Sign-Up
+                    </Button>
                 </form>
 
-                <Button
-                    type="submit"
-                    onClick={handleSubmit(onSubmit)}
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className="mt-3 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 "
-                >
-                    Sign-Up
-                </Button>
             </Box >
         </Container>
     );

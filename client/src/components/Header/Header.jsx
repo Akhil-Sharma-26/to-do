@@ -14,12 +14,12 @@ export default function Header() {
         const fetchData = async () => {
             try {
                 const res = await connection.post('/user/check',{}, { withCredentials: true });
-                console.log(res);
+                // console.log(res);
                 if(res.data.data===null){
                     seterror(true)
                 }
                 else{
-                    console.log(res);
+                    // console.log(res);
                     setuser(res.data.data)
                 }
             } catch (error) {
@@ -88,7 +88,7 @@ export default function Header() {
                                     }
                                     to="/"
                                 >
-                                    Home
+                                    Baskets
                                 </NavLink>
                             </li>
                             <li>
@@ -98,9 +98,9 @@ export default function Header() {
                                         ${isActive ? "text-blue-500" : "text-gray-800"}
                                         border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-blue-500 lg:p-0`
                                     }
-                                    to="/addnew"
+                                    to="/newbasket"
                                 >
-                                    Add New
+                                    New Basket
                                 </NavLink>
                             </li>
                             { /*

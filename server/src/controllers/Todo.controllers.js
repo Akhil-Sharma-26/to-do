@@ -38,7 +38,55 @@ async function getTodos(req,res){
         data: todo
     })
 }
+async function updateTodoStatus(req,res){
+    const todoID = req.params.tid
+    const todo = await todos.findById(todoID)
+    if(!todo){
+        res.status(501).json({
+            error: "Failed to update todos"
+        })
+    }
+    todo.complete = !todo.complete
+    await todo.save()
+    return res.status(200).json({
+        data: "Successfully updated the status of the todo"
+    })
+}
+async function editTodo(req,res){
+    const todoID = req.params.tid
+    const {content} = req.body
+        const todo = await todos.findById(todoID)
+        if(!todo){
+            res.status(501).json({
+                error: "Failed to edit todos"
+            })
+        }
+        todo.content = content
+        await todo.save()
+        return res.status(200).json({
+            data: "Successfully updated the status of the todo"
+        })
+}
+async function deleteTodo(req,res){
+    const todoID = req.params.tid
+    const todo = await todos.findById(todoID)
+    if(!todo){
+        res.status(501).json({
+            error: "Failed to delete todos"
+        })
+
+    }
+    await todos.findByIdAndDelete(todoID);
+    return res.status(200).json({
+        data: "Successfully deleted the todo"
+    })
+
+    
+}
 export {
+    deleteTodo,
+    editTodo,
+    updateTodoStatus,
     createTodo,
     getTodos
 }

@@ -28,13 +28,13 @@ function TodoList() {
   return (
     <div>
       <div className="bg-blue-200 min-h-screen py-8">
-        <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
+        <div className="w-full max-w-2xl bg-white mx-auto shadow-md rounded-lg px-4 py-3 text-white">
           <div className="mb-4">
             <AddTodo />
           </div>
           <div className="flex flex-col gap-y-3">
             {todos.map(todo => (
-              <Todos todo={todo} />
+              <Todos key={todo._id} todo={todo} />
             ))}
           </div>  
         </div>
