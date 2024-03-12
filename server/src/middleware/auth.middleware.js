@@ -3,7 +3,7 @@ import  User from "../models/user.model.js";
 
 export async function verifyJWT (req, _, next) {
     // console.log(req.cookies?.accessToken);
-    // try {
+    try {
         // console.log("asdsa: ",req.cookies);
         const token = req.cookies?.accessToken;
         
@@ -23,8 +23,8 @@ export async function verifyJWT (req, _, next) {
     
         req.user = user;
         next()
-    // } catch (error) {
-    //     throw new Error(401, error?.message || "Invalid access token")
-    // }
+    } catch (error) {
+        next(error)
+    }
     
 }
