@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 import connection from '../utils/Backend_connect';
+
+import {useNavigate} from "react-router-dom";
 // import { Path } from 'react-router-dom';
 
 function SignupPage() {
@@ -15,15 +17,16 @@ function SignupPage() {
     //     password: string;
     // }
     const { register, handleSubmit } = useForm();
-
+    const nav = useNavigate();
 
     const onSubmit = async (data) => {
         try {
             const response = await connection.post('/user/signup', data, { withCredentials: true });
             // console.log(response);
-            console.log(`${import.meta.env.VITE_APP_BACK}/api/v1`);
-
-            console.log('success: from server')
+            // console.log(`${import.meta.env.VITE_APP_BACK}/api/v1`);
+            nav('/login');
+            alert('Signup Successful. Now Please login to continue');
+            // console.log('success: from server')
         } catch (error) {
             console.log('error: from server');
             console.log(error);
