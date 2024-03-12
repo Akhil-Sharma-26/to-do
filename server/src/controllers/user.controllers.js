@@ -64,7 +64,9 @@ async function LoginUser(req,res){
     try {
         const {email,password} = req.body;
         if(!email && !password){
-            console.log('Something is missing');
+            return res.status(400).json({
+                error: "Some fields are missing"
+            })
         }
         const user = await User.findOne({
             $or : [
