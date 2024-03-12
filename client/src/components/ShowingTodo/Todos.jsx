@@ -8,7 +8,7 @@ export default function Todos({ todo }) {
         const [content,setcontent] = useState(todo.content)
       async function toggleCompleted() {
         try {
-          const res = await connection.post(`/todo/update/${todo._id}`, {},{ withCredentials: true });
+          const res = await connection.get(`/todo/update/${todo._id}`,{ withCredentials: true });
         //   setTodos(res.data.data);
         setTimeout(() => {
             navigate(0) 
@@ -30,7 +30,7 @@ export default function Todos({ todo }) {
       }
       async function delTodo(){
         try {
-            const res = await connection.post(`/todo/del/${todo._id}`,{},{ withCredentials: true });
+            const res = await connection.get(`/todo/del/${todo._id}`,{ withCredentials: true });
           setTimeout(() => {
               navigate(0) 
           }, 500);

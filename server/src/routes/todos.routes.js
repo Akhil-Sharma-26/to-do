@@ -6,8 +6,8 @@ const router = Router()
 
 router.route('/createTodo/:bracketID').post(verifyJWT,createTodo)
 router.route('/get/:bid').get(verifyJWT,getTodos)
-router.route('/update/:tid').post(verifyJWT,updateTodoStatus)
+router.route('/update/:tid').get(verifyJWT,updateTodoStatus)
 router.route('/edit/:tid').post(verifyJWT,editTodo)
-router.route('/del/:tid').post(verifyJWT,deleteTodo)
+router.route('/del/:tid').get(verifyJWT,deleteTodo)
 
 export default router
