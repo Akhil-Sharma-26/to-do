@@ -26,10 +26,10 @@ function LoginPage ()  {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
         const response = await connection.post('/user/login', data, { withCredentials: true });
-        console.log('helo');
+        // console.log('helo');
         
         // console.log(response.data.data.username);
         // setusername(response.data.data.username)

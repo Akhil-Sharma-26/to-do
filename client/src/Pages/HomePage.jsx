@@ -10,7 +10,7 @@ const HomePage = () => {
             try {
                 const res = await connection.get('/basket/get', { withCredentials: true });
                 setData(res.data.data);
-                console.log(res.data.data);
+                // console.log(res.data.data);
             } catch (error) {
                 setDeror(true);
                 setData([]);

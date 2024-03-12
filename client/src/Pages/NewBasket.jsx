@@ -11,10 +11,10 @@ const NewBasket = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(title);
+        // console.log(title);
         try {
             const res = await connection.post('/basket/create', { title }, { withCredentials: true });
-            console.log(res);
+            // console.log(res);
             route('/')
         } catch (error) {
             console.log("Error creating basket", error);

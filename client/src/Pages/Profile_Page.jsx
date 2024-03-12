@@ -6,7 +6,7 @@ export default function Profile_Page() {
     const logoutHandler = async () => {
         try {
             const res = await connection.post('/user/logout', {} , { withCredentials: true });
-            console.log(res);
+            // console.log(res);
             setTimeout(() => {
                 router(0)
             }, 1000);

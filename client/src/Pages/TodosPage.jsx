@@ -6,14 +6,14 @@ import AddTodo from '../components/AddTodo/AddingTodo.jsx';
 
 function TodoList() {
   const { bid } = useParams();
-  console.log(bid);
+  // console.log(bid);
   const [todos, setTodos] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await connection.get(`/todo/get/${bid}`, { withCredentials: true });
         setTodos(res.data.data);
-        console.log(res);
+        // console.log(res);
       } catch (error) {
         console.log(error);
       }
