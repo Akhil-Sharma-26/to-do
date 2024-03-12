@@ -5,17 +5,21 @@ async function CreatingBasket(req,res){
     const {title} = req.body
     // try {
         if(!title){
-            throw new Error(404,'I Need some title here')
+            return res.status(400).json({
+                error: "Title is missing"
+            })
         }
         const Basket = await new TodoBasket({
             title: title,
             createdBy: req.user?._id
         })
         await Basket.save()
-        console.log(Basket);
+        // console.log(Basket);
         // await User.save
         if(!Basket){
-            throw new Error(502,'Basket Creation Failed');
+            return res.status(501).json({
+                error: "Failed to make Basket"
+            })
         }
 
         return res.status(200).json({
@@ -27,21 +31,29 @@ async function CreatingBasket(req,res){
 }
 async function deleteBasket(req,res){
     const {BasketID} = req.params
-    console.log(req.params);
+    // console.log(req.params);
     if(!BasketID){
-        throw new Error(404,'I Need some ID here')
+        return res.status(400).json({
+            error: "BasketID is missing"
+        })
     }
     const basket = await TodoBasket.findById(BasketID)
     if(!basket){
-        throw new Error(404,'Basket doent exist')
+        return res.status(404).json({
+            error: "No Basket found"
+        })
     }
-    console.log(basket);
+    // console.log(basket);
     if(!(basket?.createdBy.toString() === req.user?._id.toString())){
-        throw new Error(501,"Very bad thing. Unauthorized access!!")
+        return res.status(401).json({
+            error: "You are not authorized to delete this Basket"
+        })
     }
     const delBasket = await TodoBasket.findByIdAndDelete(BasketID)
     if(!delBasket){
-        throw new Error(500, "Can't delete Basket")
+        return res.status(501).json({
+            error: "Failed to delete the Basket"
+        })
     }
     const userdel = await User.findByIdAndUpdate(req.user?._id,{
         $pull:{
@@ -50,7 +62,9 @@ async function deleteBasket(req,res){
     },{new:true})
     // console.log(userdel);
     if(!userdel){
-        throw new Error('Couldnt update user when deleting')
+        return res.status(501).json({
+            error: "Failed to delete the Basket"
+        })
     }
     res.status(200).json({
         data: "Nicely deleted the Basket"

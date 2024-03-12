@@ -5,6 +5,8 @@ export default async function connect(){
         const res = await mongoose.connect(process.env.MONGO_URI)
         console.log('MongoDB connected successfully. MongoHost:',res.connection.host)
     } catch (error) {
-        console.log('MongoDB connection failed',error)
+        return res.status(501).json({
+            error: "Failed to connect to the database"
+        })
     }
 }

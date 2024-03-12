@@ -3,10 +3,12 @@ import TodoBasket from "../models/todoBasket.model.js";
 async function createTodo(req,res){
     const bracketID = req.params.bracketID
     const {content,complete} = req.body
-    console.log(req.params);
-    console.log(bracketID);
+    // console.log(req.params);
+    // console.log(bracketID);
     if(!content){
-        throw new Error('Fields are missing!!!')
+        return res.status(400).json({
+            error: "Content is missing"
+        })
     }
     const newTodo = new todos({
         createdbyBasket:bracketID,

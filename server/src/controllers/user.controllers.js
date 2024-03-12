@@ -11,14 +11,18 @@ const generateAccessToken = async (user) => {
         await user.save({ validateBeforeSave: false }); 
         return accessToken;
     } catch (error) {
-        throw new Error(500, "Token creation failed");
+        return res.status(500).json({
+            error: "Failed to generate access token"
+        })
     }
 }
 async function registerUser(req,res){
     // console.log(req.body)
     const {username,password,email} = req.body
     if(!username && !password && !email){
-        throw new Error('Some fields are not present');
+        return res.status(400).json({
+            error: "Some fields are missing"
+        })
     }
     // console.log(username,password,email);
     // try {
@@ -30,7 +34,9 @@ async function registerUser(req,res){
         })
         // console.log(existedUser); // null if not exist
         if(existedUser){
-            throw new Error('user already exists!!')
+            return res.status(400).json({
+                error: "User already exists"
+            })
         }
         const user = await User.create({
             username: username,
@@ -41,7 +47,9 @@ async function registerUser(req,res){
         const CreatedUser = await User.findById(user._id).select("-password -accessToken"); //
         // This above method can be removed as it may be a burden db call
         if (!CreatedUser) { 
-            throw new Error(500, "User creation failed");
+            return res.status(500).json({
+                error: "Failed to create user"
+            })
         }
         // console.log(CreatedUser);
         return res.status(200).json({
@@ -65,19 +73,25 @@ async function LoginUser(req,res){
             ]
         })
         if(!user){
-            throw new Error(404,'User doenst exist in DB')
+            return res.status(404).json({
+                error: "User not found"
+            })
         }
         const passValidorNot = await user.isPasswordCorrect(password)
         if (!passValidorNot) {
-            throw new Error(401, "Password is incorrect");
+            return res.status(401).json({
+                error: "Invalid Password"
+            })
         }
         const accessToken= await generateAccessToken(user); // I am tweeking the argument here, change it to prev state if some unexpected error appears 
-        console.log(accessToken);
+        // console.log(accessToken);
         return res.status(200).cookie("accessToken",accessToken,options).json({
             data: user
         })
     } catch (error) {
-        console.log('A very serious error has poped out!!',error);
+        return res.status(500).json({
+            error: "Failed to login"
+        })
     }
 }
 async function logout(req,res){

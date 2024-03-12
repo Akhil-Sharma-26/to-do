@@ -9,7 +9,9 @@ export async function verifyJWT (req, _, next) {
         
         // console.log(token);
         if (!token) {
-            throw new Error(300, "Unauthorized request")
+            return res.status(401).json({
+                error: "Access token is missing"
+            })
         }
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
@@ -18,7 +20,9 @@ export async function verifyJWT (req, _, next) {
         // console.log(user);
         if (!user) {
             
-            throw new Error(401, "Invalid Access Token")
+            return res.status(401).json({
+                error: "User not found"
+            })
         }
     
         req.user = user;
