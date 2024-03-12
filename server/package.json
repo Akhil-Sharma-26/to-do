@@ -6,8 +6,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev":"nodemon -r dotenv/config --experimental-json-modules src/index.js",
-    "build": "tsc"
+    "dev":"nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
