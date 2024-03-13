@@ -27,7 +27,7 @@ const HomePage = () => {
                     Please Login
                 </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {data.map((item) => (
                                     <button key={item._id} onClick={() => router(`baskets/${item._id}`)}>        
                                        <div key={item._id} className=" p-8 rounded-md flex justify-center items-center shadow-2xl bg-blue-100" style={{ width: '400px', height: '400px' }}>
