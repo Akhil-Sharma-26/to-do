@@ -44,8 +44,7 @@ export default function Header() {
                                 />
                             </Link>
         
-                            <div className={`flex items-center lg:hidden ${isOpen ? 'hidden' : 'block'
-                                }`}>
+                            <div className={`flex items-center lg:hidden`}>
                                 <button onClick={toggleMenu}>
                                     <span>&#9776;</span>
                                 </button>
@@ -84,7 +83,7 @@ export default function Header() {
                                         <li>
                                             <Link
                                                 to="/profile"
-                                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 my-4 focus:outline-none"
                                             >
                                                 {user?.username}
                                             </Link>
@@ -102,7 +101,7 @@ export default function Header() {
                                             <li>
                                                 <Link
                                                     to="/signup"
-                                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none"
+                                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 my-3 py-2 lg:py-2.5 focus:outline-none"
                                                 >
                                                     Sign up
                                                 </Link>
