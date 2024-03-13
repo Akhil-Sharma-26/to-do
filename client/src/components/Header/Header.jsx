@@ -8,17 +8,21 @@ import connection from "../../utils/Backend_connect";
 // import UserContext from "../../context/userContext";
 export default function Header() {
     // const { user } = useContext(UserContext)
-    const [error,seterror]=useState(false)
-    const [user,setuser]=useState("Hello")
-    useEffect(()=>{
+    const [error, seterror] = useState(false)
+    const [user, setuser] = useState("Hello")
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleMenu = () => {
+            setIsOpen(!isOpen);
+    }
+    useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await connection.post('/user/check',{}, { withCredentials: true });
+                const res = await connection.post('/user/check', {}, { withCredentials: true });
                 // console.log(res);
-                if(res.data.data===null){
+                if (res.data.data === null) {
                     seterror(true)
                 }
-                else{
+                else {
                     // console.log(res);
                     setuser(res.data.data)
                 }
@@ -27,7 +31,7 @@ export default function Header() {
             }
         };
         fetchData();
-    },[])
+    }, [])
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -39,6 +43,10 @@ export default function Header() {
                             alt="Logo"
                         />
                     </Link>
+                    <button onClick={toggleMenu} className="lg:hidden">
+                                            {/* Add a basic hamburger icon */}
+                                            <span>&#9776;</span>
+                                        </button>
                     <div className="flex items-center lg:order-2">
                         {!error ? (
                             <Link
@@ -54,14 +62,14 @@ export default function Header() {
                             >
                                 Log in
                             </Link>
-                            <Link
-                                to="/signup"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none"
-                            >
-                                Sign up
-                            </Link>
+                                <Link
+                                    to="/signup"
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none"
+                                >
+                                    Sign up
+                                </Link>
                             </>
-                            
+
                         )}
                         {/* (
                         <Link
@@ -72,10 +80,11 @@ export default function Header() {
                         </Link>
                         )
                         
-                        } */}                        
+                        } */}
                     </div>
                     <div
-                        className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+                        className={`${isOpen ? 'block' : 'hidden'
+                            } lg:flex justify-between items-center w-full lg:w-auto lg:order-1`}
                         id="mobile-menu-2"
                     >
                         <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
