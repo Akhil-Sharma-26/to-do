@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 import connection from '../utils/Backend_connect';
 
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 // import { Path } from 'react-router-dom';
 
 function SignupPage() {
@@ -33,7 +33,14 @@ function SignupPage() {
         }
     }
 
+
     return (
+        <>
+        <div className='flex items-center justify-center mt-40 font-bold'>
+                <h1 className='text-4xl'>
+                  Signup
+                </h1>
+              </div>
         <Container maxWidth="xs" className='text-black'>
             <Box
                 sx={{
@@ -100,6 +107,12 @@ function SignupPage() {
 
             </Box >
         </Container>
+        <div className='flex items-center justify-center mt-5'>
+            Already have an account?
+            &nbsp;
+            <Link to='/login' className='underline text-blue-500'>Login here</Link>
+        </div>
+        </>
     );
 }
 
