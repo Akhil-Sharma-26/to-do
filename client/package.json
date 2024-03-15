@@ -17,6 +17,7 @@
     "@nextui-org/react": "^2.2.9",
     "@reduxjs/toolkit": "^2.1.0",
     "@tinymce/tinymce-react": "github:tinymce/tinymce-react",
+    "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.7",
     "framer-motion": "^11.0.3",
     "html-react-parser": "^5.1.2",

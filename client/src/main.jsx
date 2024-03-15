@@ -12,7 +12,7 @@ import NewBasket from './Pages/NewBasket.jsx'
 import HomePage from './Pages/HomePage.jsx'
 import TodoList from './Pages/TodosPage.jsx'
 import Profile_Page from './Pages/Profile_Page.jsx'
-
+import { Analytics } from '@vercel/analytics/react';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
@@ -29,6 +29,7 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <Analytics />
     <RouterProvider router={router}/>
   </React.StrictMode>,
 )
