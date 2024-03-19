@@ -12,5 +12,5 @@ const router = Router()
 router.route('/login').post(LoginUser)
 router.route('/signup').post(registerUser)
 router.route('/logout').post(verifyJWT,logout)
-router.route('/check').get(checkUser)
+router.route('/check').post(checkUser)
 export default router
