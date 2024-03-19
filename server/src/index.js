@@ -7,13 +7,6 @@ import connect from './db/dbConnect.js'
 connect()
 
 const app = express()
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && req.header('x-forwarded-proto') !== 'https') {
-    res.redirect(`https://${req.header('host')}${req.url}`);
-  } else {
-    next();
-  }
-});
 app.use(cookieParser())
 app.use(cors({
     // origin: 'http://localhost:5173',
