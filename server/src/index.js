@@ -10,7 +10,7 @@ const app = express()
 app.use(cookieParser())
 app.use(cors({
     // origin: 'http://localhost:5173',
-    origin: 'https://to-do-orpin-rho.vercel.app' || 'https://to-do-git-main-akhil-sharma-26.vercel.app/' || 'http://localhost:3000' || 'http://localhost:5173',
+    origin:'https://to-do-six-omega.vercel.app/',
     credentials: true,
     headers: ["Content-Type"],
 }))
