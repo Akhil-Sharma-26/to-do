@@ -11,7 +11,7 @@ function TodoList() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await connection.get(`/todo/get/${bid}`, { withCredentials: true });
+        const res = await connection.get(`/todo/get/${bid}`);
         setTodos(res.data.data);
         // console.log(res);
       } catch (error) {

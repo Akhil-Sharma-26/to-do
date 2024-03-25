@@ -5,7 +5,7 @@ export default function Profile_Page() {
     const router = useNavigate();
     const logoutHandler = async () => {
         try {
-            const res = await connection.post('/user/logout', {} , { withCredentials: true });
+            const res = await connection.post('/user/logout', {} );
             // console.log(res);
             setTimeout(() => {
                 router(0)

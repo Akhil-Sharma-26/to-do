@@ -21,7 +21,7 @@ function SignupPage() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await connection.post('/user/signup', data, { withCredentials: true });
+            const response = await connection.post('/user/signup', data);
             // console.log(response);
             // console.log(`${import.meta.env.VITE_APP_BACK}/api/v1`);
             nav('/login');

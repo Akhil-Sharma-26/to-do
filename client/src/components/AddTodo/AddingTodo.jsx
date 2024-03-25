@@ -14,7 +14,7 @@ function AddTodo() {
         e.preventDefault()
         // console.log(content)
         try {
-            const res = await connection.post(`/todo/createTodo/${bid}`, {content:content}, { withCredentials: true });
+            const res = await connection.post(`/todo/createTodo/${bid}`, {content:content});
             navigate(0)
             // console.log(res);
         } catch (error) {

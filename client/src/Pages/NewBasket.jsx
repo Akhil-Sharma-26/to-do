@@ -13,7 +13,7 @@ const NewBasket = () => {
         e.preventDefault();
         // console.log(title);
         try {
-            const res = await connection.post('/basket/create', { title }, { withCredentials: true });
+            const res = await connection.post('/basket/create', { title });
             // console.log(res);
             route('/')
         } catch (error) {

@@ -9,7 +9,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await connection.get('/basket/get', { withCredentials: true });
+                const res = await connection.get('/basket/get');
                 setData(res.data.data);
                 if (res.data.data.length === 0) {
                     setEmpty(true);

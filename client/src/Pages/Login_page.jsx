@@ -28,7 +28,7 @@ function LoginPage() {
   const onSubmit = async (data) => {
     // console.log(data);
     try {
-      const response = await connection.post('/user/login', data, { withCredentials: true });
+      const response = await connection.post('/user/login', data);
       // console.log('helo');
 
       // console.log(response.data.data.username);

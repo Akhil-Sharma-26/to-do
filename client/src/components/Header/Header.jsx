@@ -17,7 +17,7 @@ export default function Header() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await connection.post('/user/check', { withCredentials: true });
+                const res = await connection.post('/user/check');
                 // console.log(res);
                 if (res.data.data === null) {
                     seterror(true)
